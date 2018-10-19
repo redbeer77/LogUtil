@@ -8,58 +8,74 @@ namespace LogUtil.Log
 {
     public class LogUtilClass
     {
-        private string nombreLog;
-        private string rutaLog;
+        private string logName;
+        private string logRoute;
         private string path;
         private DateTime init = DateTime.Now;
         NameValueCollection config;
-
+        private bool totalTime;
+       
+        //endlog is called on destruction
         ~LogUtilClass(){
             this.EndLog();
         }
 
-        public LogUtilClass()
+        public LogUtilClass(bool totalTime=true)
         {
+            //obtains route to appconfig
             config = ConfigurationManager.GetSection("Rutes") as NameValueCollection;
-            if (config != null) {rutaLog = config["Log"].ToString();}
+            if (config != null) {logRoute = config["Log"].ToString();}
 
+            //obtains log filename to appconfig
             config = ConfigurationManager.GetSection("Names") as NameValueCollection;
-            if (config != null){nombreLog = config["Log"].ToString();}
+            if (config != null){logName = config["Log"].ToString();}
 
-            path = rutaLog + nombreLog;
+            //Log path
+            path = logRoute + logName;
 
-            FileStream fs = File.OpenWrite(rutaLog + nombreLog);
+            //if no exist create them
+            FileStream fs = File.OpenWrite(path);
+            
+            //close file
             fs.Close();
+
+            this.totalTime = totalTime;
+
+            //write first Log line
             this.InitLog();
         }
-
-        private void PrintMessage(string texto)
+        //basic print message
+        private void PrintMessage(string text)
         {
             if (File.ReadAllText(path).Length > 0)
             {
-                File.AppendAllText(path, Environment.NewLine + texto, Encoding.UTF8);
+                File.AppendAllText(path, Environment.NewLine + text, Encoding.UTF8);
             }
             else
             {
-                File.AppendAllText(path, texto, Encoding.UTF8);
+                File.AppendAllText(path, text, Encoding.UTF8);
             }
         }
+        //First log line
         private void InitLog()
         {
-            this.PrintMessage("Init " + DateTime.Now.ToString());
+            this.PrintMessage("Init " + init.ToString());
         }
+        //Last line, endlog is called on destruction
         private void EndLog()
         {
+            if(this.totalTime)
             this.WriteInLog("Total: " + (DateTime.Now - init).ToString());
+
             this.PrintMessage("End " + DateTime.Now.ToString());
         }
         public void WriteInLog(string text)
         {
             PrintMessage(String.Format("\t{0}", text));
         }
-        public void WriteError(string site , string e)
+        public void WriteError(string site , string exception)
         {
-            this.WriteInLog( "Error in " + site + ": " + String.Format("\t{0}", e));
+            this.WriteInLog( "Error in " + site + ": " + String.Format("\t{0}", exception));
         }
     }
 }
