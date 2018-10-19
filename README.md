@@ -18,3 +18,15 @@ Init 19/10/2018 18:53:28
 	Total: 00:00:00.1599075
 End 19/10/2018 18:53:28
 ```
+
+if you do not want the total time
+```
+LogUtilClass log = new LogUtilClass(false);
+```
+the result see like
+```
+Init 19/10/2018 18:53:28
+	Example Text
+	Error in Creating Error: 	Referencia a objeto no establecida como instancia de un objeto.
+End 19/10/2018 18:53:28
+```
