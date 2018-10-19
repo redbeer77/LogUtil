@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogUtil.Log;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,9 @@ namespace LogUtil
     {
         static void Main(string[] args)
         {
+            LogUtilClass log = new LogUtilClass();
+
+            log.WriteInLog("Example Text");
         }
     }
 }
