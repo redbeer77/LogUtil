@@ -59,12 +59,13 @@ namespace LogUtil.Log
             this.WriteInLog("Total: " + (DateTime.Now - init).ToString());
             this.PrintMessage("End " + DateTime.Now.ToString());
         }
-
         public void WriteInLog(string text)
         {
-
             PrintMessage(String.Format("\t{0}", text));
         }
-
+        public void WriteError(string site , Exception e)
+        {
+            this.WriteInLog( "Error in " + site + ": " + String.Format("\t{0}", e.Message));
+        }
     }
 }

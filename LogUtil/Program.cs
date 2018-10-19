@@ -14,6 +14,18 @@ namespace LogUtil
             LogUtilClass log = new LogUtilClass();
 
             log.WriteInLog("Example Text");
+
+            string site = "Creating Error";
+            object o2 = null;
+            try
+            {
+                int i2 = (int)o2;   // Error  
+            }
+            catch(Exception e)
+            {
+                log.WriteError(site, e);
+            }
+
         }
     }
 }
