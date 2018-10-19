@@ -12,25 +12,19 @@ namespace LogUtil.Log
         private string rutaLog;
         private string path;
         private DateTime init = DateTime.Now;
-        private DateTime end ;
+        NameValueCollection config;
 
-        ~LogUtilClass()
-        {
+        ~LogUtilClass(){
             this.EndLog();
         }
 
         public LogUtilClass()
         {
-            NameValueCollection config = ConfigurationManager.GetSection("Rutes") as NameValueCollection;
-            if (config != null)
-            {
-                rutaLog = config["Log"].ToString();
-            }
+            config = ConfigurationManager.GetSection("Rutes") as NameValueCollection;
+            if (config != null) {rutaLog = config["Log"].ToString();}
+
             config = ConfigurationManager.GetSection("Names") as NameValueCollection;
-            if (config != null)
-            {
-                nombreLog = config["Log"].ToString();
-            }
+            if (config != null){nombreLog = config["Log"].ToString();}
 
             path = rutaLog + nombreLog;
 
@@ -63,9 +57,9 @@ namespace LogUtil.Log
         {
             PrintMessage(String.Format("\t{0}", text));
         }
-        public void WriteError(string site , Exception e)
+        public void WriteError(string site , string e)
         {
-            this.WriteInLog( "Error in " + site + ": " + String.Format("\t{0}", e.Message));
+            this.WriteInLog( "Error in " + site + ": " + String.Format("\t{0}", e));
         }
     }
 }

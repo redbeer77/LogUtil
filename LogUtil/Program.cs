@@ -23,9 +23,14 @@ namespace LogUtil
             }
             catch(Exception e)
             {
-                log.WriteError(site, e);
+                log.WriteError(site, e.Message);
             }
 
+
+            for (int i = 0; i < 10000; i++)
+            {
+                log.WriteInLog( i.ToString() + " Example Text"); 
+            }
         }
     }
 }
