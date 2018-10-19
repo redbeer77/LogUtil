@@ -12,7 +12,7 @@ namespace LogUtil.Log
         private string rutaLog;
         private string path;
         private DateTime init = DateTime.Now;
-        private DateTime end = DateTime.Now;
+        private DateTime end ;
 
         ~LogUtilClass()
         {
@@ -56,7 +56,7 @@ namespace LogUtil.Log
         }
         private void EndLog()
         {
-            this.WriteInLog("Total: " + (end - init).ToString());
+            this.WriteInLog("Total: " + (DateTime.Now - init).ToString());
             this.PrintMessage("End " + DateTime.Now.ToString());
         }
 
