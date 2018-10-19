@@ -12,8 +12,9 @@ Can configure route and name of log in app.config
 ```
 Result Example:
 ```
-Init 19/10/2018 18:24:39
+Init 19/10/2018 18:53:28
 	Example Text
-	Total: 00:00:00.0679608
-End 19/10/2018 18:24:39
+	Error in Creating Error: 	Referencia a objeto no establecida como instancia de un objeto.
+	Total: 00:00:00.1599075
+End 19/10/2018 18:53:28
 ```
